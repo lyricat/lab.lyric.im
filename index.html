@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lyric's Labs</title>
+  <link rel="shortcut icon" href="favicon.png"> 
+  <link rel="shortcut icon" href="favicon.png"> 
+  <link rel="apple-touch-icon-precomposed" href="favicon.png">
+  <link rel="stylesheet" href="assets/css/vue-eleui.css">
+  <script src="assets/scripts/vue.js"></script>
+  <script src="assets/scripts/vue-eleui.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4178606-10"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-4178606-10');
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+    input, button, textarea { font-family: inherit; }
+    h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+    em { font-style: normal !important; }
+    html, body {
+      height: 100%;
+      font-family: 'PingFangSC-light', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    }
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .top {
+      height: 60px;
+    }
+    section {
+      height: 100%;
+    }
+    .apps {
+      /* display: flex; */
+      margin: 0 -20px;
+    }
+    .app {
+      width: 90px;
+      margin: 0 2px 10px 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      float: left;
+      outline: none;
+    }
+    .app .app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20%;
+      display: block;
+    }
+    .app .app-name {
+      margin-top: 6px;
+      display: block;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="container">
+    <el-container>
+      <el-header>
+        <el-menu default-active="0" mode="horizontal" @select="handleSelect">
+          <el-menu-item index="0">常用</el-menu-item>
+          <el-menu-item index="1">区块链</el-menu-item>
+        </el-menu>
+      </el-header>
+      <el-main class="main-body">
+        <section v-show="paneStats[0]" class="main-section">
+          <div class="apps">
+            <a v-for="app in apps[0]" class="app" :href="app.link" target="_blank" v-bind:key="app.name">
+              <img class="app-icon" :src="app.icon"/>
+              <span class="app-name">{{app.name}}</span>
+            </a>
+          </div>
+        </section>
+        <section v-show="paneStats[1]" class="main-section">
+          <div class="apps">
+            <a v-for="app in apps[1]" class="app" :href="app.link" target="_blank" v-bind:key="app.name">
+              <img class="app-icon" :src="app.icon"/>
+              <span class="app-name">{{app.name}}</span>
+            </a>
+          </div>
+        </section>
+        <section v-show="paneStats[2]" class="main-section">
+        </section>
+      </el-main>
+    </el-container>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          paneStats: [true, false, false],
+          apps: [
+            [{
+              icon: 'assets/images/icon-wechat-format.png',
+              name: 'Wx Format',
+              link: '//lab.lyric.im/wxformat'
+            }],
+            [{
+              icon: 'assets/images/icon-mixin-networ-monitor.png',
+              name: 'Mixin Monitor',
+              link: 'https://node.f1ex.io'
+            }, {
+              icon: 'assets/images/icon-gbi-news.png',
+              name: 'GBI.news',
+              link: 'https://gbi.news'
+            }, {
+              icon: 'assets/images/icon-etherscan.png',
+              name: 'Etherscan',
+              link: 'https://etherscan.io/'
+            }]
+          ]
+        }
+      },
+      methods: {
+        handleSelect: function (idx, path) {
+          this.paneStats = this.paneStats.map(function (x, xi) {
+            return xi === parseInt(idx)
+          })
+        }
+      }
+    })
+  </script> 
+</body>
+</html>
